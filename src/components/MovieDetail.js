@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { currentMovie } from '../store/actions/search'
 
 class MovieDetail extends Component {
-  constructor(props){
-    super(props);
-    //do something here
-  }
+
   componentWillMount(){
     this.props.currentMovie(this.props.match.params.movieId);
   }

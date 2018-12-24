@@ -8,12 +8,14 @@ import { search } from '../store/actions/search'
 class Dashboard extends Component {
   constructor(props){
     super(props);
-    //state = { };
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      number: 10,
+      currentPage:1
+   };
   }
 
   componentDidMount(){
-    const startUp ='shawshank redemption';
+    const startUp ='lion';
     this.props.search(startUp);
   }
 
@@ -21,17 +23,34 @@ class Dashboard extends Component {
     this.props.search(term);
   }
 
+  handleResultsPerPage = (event) => {
+    this.setState({number: event.target.value});
+  }
 
+  handleClick = (event) => {
+    this.setState({currentPage:Number(event.target.id)});
+  }
 
   render() {
     return (
     <div>
-        <SearchBar handleSubmit= {this.handleSubmit} />
-        <Pagination />
-        <MovieList movieList ={this.props.movies} />
+        <SearchBar
+          handleSubmit= {this.handleSubmit}
+          />
+        <Pagination
+          number={this.state.number}
+          perPage={this.handleResultsPerPage}
+          pageNo= {this.handleClick}
+          movies={this.props.movies}
+        />
+        <MovieList
+          currentPage={this.state.currentPage}
+          number={this.state.number}
+          movies ={this.props.movies}
+        />
     </div>
     )
-  }
+  };
 }
 
 function mapStateToProps(state){

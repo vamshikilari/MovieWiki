@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 export class SearchBar extends Component {
   state = {term: ''};
 
@@ -15,11 +14,13 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <div className="search-bar ui segment">
-        <form onSubmit={this.handleSubmit}  className="ui form">
-          <div className="field">
-            <label>Search For Movies</label>
+      <div className="row z-depth-1">
+        <form onSubmit={this.handleSubmit}>
+          <div className="input-field">
+            <i className="material-icons prefix">search</i>
+            <label htmlFor="search">Search For Movies</label>
             <input
+              id="search"
               type="text"
               value={this.state.term}
               name= 'term'
