@@ -3,24 +3,31 @@ import SearchBar from './SearchBar'
 import MovieList from './MovieList'
 import Pagination from './Pagination'
 import { connect } from 'react-redux'
-import { search } from '../store/actions/search'
+import { search, topRatedMovies } from '../store/actions/search'
 
 class Dashboard extends Component {
   constructor(props){
     super(props);
     this.state = {
       number: 10,
-      currentPage:1
+      currentPage:1,
+      term: ''
    };
   }
 
   componentDidMount(){
-    const startUp ='lion';
-    this.props.search(startUp);
-  }
+      this.props.topRatedMovies();
+    }
+
+    componentDidUpdate(){
+      localStorage.setItem('lastSearched', JSON.stringify(this.state.term));
+    }
 
   handleSubmit = (term) => {
     this.props.search(term);
+    this.setState({
+      term: term
+    });
   }
 
   handleResultsPerPage = (event) => {
@@ -61,7 +68,8 @@ function mapStateToProps(state){
 
 function bindActions(dispatch){
   return {
-    search:term => dispatch(search(term))
+    search:term => dispatch(search(term)),
+    topRatedMovies: () => dispatch(topRatedMovies())
   }
 }
 

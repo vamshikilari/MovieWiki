@@ -15,7 +15,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <div className="row z-depth-1">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} autoComplete="off">
           <div className="input-field">
             <i className="material-icons prefix">search</i>
             <label htmlFor="search">Search For Movies</label>
@@ -25,6 +25,7 @@ export class SearchBar extends Component {
               value={this.state.term}
               name= 'term'
               onChange={this.onInputchange}
+              required
              />
           </div>
         </form>
