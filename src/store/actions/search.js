@@ -73,7 +73,7 @@ export const loadState = () => {
     if (serializedState === null && serializedState2 === null) {
       return undefined;
     }else{
-        return JSON.parse(serializedState, serializedState2);
+        return JSON.parse(serializedState);
     }
   } catch (err) {
     return undefined;
