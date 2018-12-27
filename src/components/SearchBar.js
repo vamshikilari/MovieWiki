@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Typeahead} from 'react-bootstrap-typeahead'
 
 export class SearchBar extends Component {
   state = {term: ''};
@@ -8,6 +7,7 @@ export class SearchBar extends Component {
   onInputchange = (event) => {
     this.setState({[event.target.name]: event.target.value});
     const res = JSON.parse(localStorage.getItem('state').movieList.searchHistory);
+    console.log(res);
   }
 
   componentDidMount(){
@@ -33,11 +33,6 @@ export class SearchBar extends Component {
               name= 'term'
               onChange={this.onInputchange}
               required
-             />
-             <Typeahead
-               labelKey="name"
-               options={this.res}
-               placeholder="Choose a state..."
              />
           </div>
         </form>
