@@ -16,12 +16,17 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-      this.props.topRatedMovies();
+    if(localStorage.getItem('state').lastSearched === null ){
+        this.props.topRatedMovies();
+    } else{
+      return null;
+    }
     }
 
     componentDidUpdate(){
       localStorage.setItem('lastSearched', JSON.stringify(this.state.term));
     }
+
 
   handleSubmit = (term) => {
     this.props.search(term);
@@ -38,12 +43,22 @@ class Dashboard extends Component {
     this.setState({currentPage:Number(event.target.id)});
   }
 
+  gotToHome = () => {
+    this.props.topRatedMovies();
+  }
+
   render() {
     return (
     <div>
         <SearchBar
           handleSubmit= {this.handleSubmit}
           />
+        <button
+          className="waves-effect waves-light btn-small left"
+          onClick={this.gotToHome}
+          style={{marginTop:'14px'}}>
+          Home
+        </button>
         <Pagination
           number={this.state.number}
           perPage={this.handleResultsPerPage}

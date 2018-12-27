@@ -13,10 +13,7 @@ const persistentState = loadState();
 const store = createStore(rootReducer, persistentState, composeWithDevTools(applyMiddleware(thunk)));
 
 store.subscribe(throttle(() => {
-  saveState(
-    {searchHistory: store.getState().movieList.searchHistory},
-    {movies: store.getState().movieList.movies}
-  );
+ saveState(store.getState());
 }, 1000));
 
 

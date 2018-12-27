@@ -34,12 +34,8 @@ export function topRatedMovies(){
 const searchTerms = [];
 
 export function search(term="") {
+  searchTerms.push(term);
     const KEY = "63cc14d5ec25b2ab5e764e614d134fc6";
-    if(searchTerms.includes(term)){
-        return null;
-    } else{
-        searchTerms.push(term);
-    }
     return function(dispatch) {
         fetch(`${api.baseUrl}?api_key=${KEY}&query=${term}`, {
             method: 'GET',
@@ -55,22 +51,19 @@ export function search(term="") {
   }
 
 
-export const saveState = (searchHistory, movies) => {
+export const saveState = (state) => {
   try {
-    const serializedState = JSON.stringify(searchHistory);
-    const serializedState2 = JSON.stringify(movies);
-    localStorage.setItem('searchHistory', serializedState);
-    localStorage.setItem('movies', serializedState2);
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
   } catch(err) {
-    console.log(err);
+    //ignore err
   }
 };
 
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('searchHistory');
-    const serializedState2 = localStorage.getItem('movies');
-    if (serializedState === null && serializedState2 === null) {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
       return undefined;
     }else{
         return JSON.parse(serializedState);

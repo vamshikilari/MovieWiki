@@ -15,7 +15,7 @@ const moviesReducer = (state = initState, action) => {
         case SET_CURRENT_MOVIE:
         return { ...state, currentMovie: action.payload };
         case SET_SEARCH:
-        return { ...state, searchHistory: action.payload};
+        return { ...state, searchHistory: action.payload };
         default:
         return state;
     };
